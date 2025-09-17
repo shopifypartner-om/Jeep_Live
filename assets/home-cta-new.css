@@ -1,0 +1,30 @@
+.cta {
+    background-size: 100% !important;
+  display: flex;
+    padding: 40px;
+    align-items: center;
+}
+.cta .title-section {
+    color: #fff;
+}
+.cta .title-section a{
+  display: inline-block;
+    background: #ffba00;
+    padding: 10px 15px;
+}
+.cta .title-section a:after{
+      content: "";
+    background: url(Group8.png) right center no-repeat;
+    background-size: auto;
+    width: 13px;
+    height: 11px;
+    display: inline-block;
+    background-size: 12px;
+    margin-left: 5px;
+}
+.cta .title-section:hover a:after {
+      transform: rotate(25deg);
+}
+.cta > * {
+    flex: 1;
+}

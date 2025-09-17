@@ -1,0 +1,109 @@
+{%- paginate customer.orders by 20 -%}
+  <div class="page-width page-content">
+    <header class="section-header{% unless settings.type_headers_align_text %} section-header--with-link{% endunless %}">
+      <h1 class="section-header__title">{{ 'customer.account.title' | t }}</h1>
+    </header>
+
+    <div class="grid accounts">
+      <div class="grid__item medium-up--one-third nav-col">
+        <!-- <h3>{{ 'customer.account.details' | t }}</h3> -->
+        <div class="my-account-menu">
+          <ul>
+            <li class="order active"><a href="{{ routes.account_url }}">Order History</a></li>
+            <li class="editProfile"><a href="/a/profile" type="button" class="button button--full-width button--secondary">MY Profile</a></li>            
+            <li class="track"><a href="/apps/track123">Track Order</a></li>
+            <li class="wishlist"><a href="a/wishlist">My Wishlist</a></li>
+            <li class="address"><a href="{{ routes.account_addresses_url }}">Manage Address</a></li>            
+            
+            <li class="logout"><a href="{{ routes.account_logout_url }}">Logout</a></li>
+          </ul>
+        </div>
+
+        <!--
+          <div class="accounnt-navigation">
+            <p class="h5">{{ customer.name }}</p>
+
+            {{ customer.default_address | format_address }}
+
+            <p>
+              <a href="{{ routes.account_addresses_url }}" class="text-link">
+                {{- 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a
+              >
+            </p>
+            <p>
+              <a href="{{ routes.account_logout_url }}" class="btn btn--secondary btn--small section-header__link">
+                {{- 'layout.customer.log_out' | t -}}
+              </a>
+            </p>
+          </div>
+        -->
+      </div>
+      <div class="grid__item medium-up--two-thirds details-col">
+        <div class="store-welcome">
+          <h3>
+            Welcome <br>
+            {{ customer.name }} !
+          </h3>
+          <div class="address">
+            {{ customer.default_address | format_address }}
+          </div>
+        </div>
+        <h4>{{ 'customer.orders.title' | t }}</h4>
+
+        {%- if customer.orders.size != 0 -%}
+          <table class="table--responsive table--small-text">
+            <thead>
+              <tr>
+                <th>{{ 'customer.orders.order_number' | t }}</th>
+                <th>{{ 'customer.orders.date' | t }}</th>
+                <th>{{ 'customer.orders.payment_status' | t }}</th>
+                <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                <th>{{ 'customer.orders.total' | t }}</th>
+                <th scope="col" style="text-align: center;" role="columnheader">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%- for order in customer.orders -%}
+                <tr class="table__section">
+                  <td data-label="{{ 'customer.orders.order_number' | t }}">
+                    {{ order.name | link_to: order.customer_url }}
+                  </td>
+                  <td data-label="{{ 'customer.orders.date' | t }}">
+                    {{ order.created_at | time_tag: format: 'date' }}
+                  </td>
+                  <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                  <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">
+                    {{ order.fulfillment_status_label }}
+                  </td>
+                  <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                  <td role="cell" class="btns-td">
+                    <a
+                      href="https://gst.webplanex.biz/invoice-email/?shop=1377c2-45.myshopify.com&order_id={{ order.id }}&type=original"
+                      class="button__text"
+                      tareget="_blank"
+                    >
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 12V19M12 19L9.75 16.6667M12 19L14.25 16.6667M6.6 17.8333C4.61178 17.8333 3 16.1917 3 14.1667C3 12.498 4.09438 11.0897 5.59198 10.6457C5.65562 10.6268 5.7 10.5675 5.7 10.5C5.7 7.46243 8.11766 5 11.1 5C14.0823 5 16.5 7.46243 16.5 10.5C16.5 10.5582 16.5536 10.6014 16.6094 10.5887C16.8638 10.5306 17.1284 10.5 17.4 10.5C19.3882 10.5 21 12.1416 21 14.1667C21 16.1917 19.3882 17.8333 17.4 17.8333" stroke="#464455" stroke-linecap="round" stroke-linejoin="round"/></svg> Invoice
+                    </a>
+                    <a href="{{ order.customer_url }}"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="3.5" stroke="#222222"/>
+                      <path d="M20.188 10.9343C20.5762 11.4056 20.7703 11.6412 20.7703 12C20.7703 12.3588 20.5762 12.5944 20.188 13.0657C18.7679 14.7899 15.6357 18 12 18C8.36427 18 5.23206 14.7899 3.81197 13.0657C3.42381 12.5944 3.22973 12.3588 3.22973 12C3.22973 11.6412 3.42381 11.4056 3.81197 10.9343C5.23206 9.21014 8.36427 6 12 6C15.6357 6 18.7679 9.21014 20.188 10.9343Z" stroke="#222222"/>
+                      </svg> Order</a>
+                  </td>
+                </tr>
+              {%- endfor -%}
+            </tbody>
+          </table>
+
+          <hr class="hr--clear">
+
+        {%- else -%}
+          <p>{{ 'customer.orders.none' | t }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}

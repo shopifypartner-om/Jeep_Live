@@ -1,0 +1,105 @@
+<div class="site-nav">
+  <div class="site-nav__icons">
+    <a
+      href="/a/wishlist"
+      class="site-nav__link site-nav__link--icon wishlist-icon"
+      title="Wishlist"
+      alt="Wishlist"
+    >
+      <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21.1878 5.10999C20.677 4.599 20.0706 4.19364 19.4031 3.91708C18.7357 3.64052 18.0203 3.49817 17.2978 3.49817C16.5753 3.49817 15.8599 3.64052 15.1924 3.91708C14.525 4.19364 13.9185 4.599 13.4078 5.10999L12.3478 6.16999L11.2878 5.10999C10.2561 4.0783 8.85681 3.4987 7.39778 3.4987C5.93874 3.4987 4.53947 4.0783 3.50778 5.10999C2.47608 6.14169 1.89648 7.54096 1.89648 8.99999C1.89648 10.459 2.47608 11.8583 3.50778 12.89L4.56777 13.95L12.3478 21.73L20.1278 13.95L21.1878 12.89C21.6988 12.3792 22.1041 11.7728 22.3807 11.1053C22.6573 10.4379 22.7996 9.72248 22.7996 8.99999C22.7996 8.27751 22.6573 7.5621 22.3807 6.89464C22.1041 6.22718 21.6988 5.62075 21.1878 5.10999Z" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    {%- if shop.customer_accounts_enabled -%}
+      <a
+        class="site-nav__link site-nav__link--icon small--hide"
+        href="{{ routes.account_url }}"
+        title="My Account"
+        alt="My Account"
+      >
+        <svg width="30" height="29" viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21.6278 24.02V21.78C21.6278 20.5918 21.1558 19.4523 20.3156 18.6122C19.4754 17.772 18.3359 17.3 17.1478 17.3H8.18776C6.99959 17.3 5.86009 17.772 5.01993 18.6122C4.17976 19.4523 3.70776 20.5918 3.70776 21.78V24.02" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12.6677 12.82C15.142 12.82 17.1477 10.8142 17.1477 8.33998C17.1477 5.86575 15.142 3.85999 12.6677 3.85999C10.1935 3.85999 8.18774 5.86575 8.18774 8.33998C8.18774 10.8142 10.1935 12.82 12.6677 12.82Z" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="icon__fallback-text">
+          {%- if customer -%}
+            {{ 'layout.customer.account' | t }}
+          {%- else -%}
+            {{ 'layout.customer.log_in' | t }}
+          {%- endif -%}
+        </span>
+      </a>
+    {%- endif -%}
+
+    {%- if settings.search_enable -%}
+      <a
+        href="{{ routes.search_url }}"
+        class="site-nav__link site-nav__link--icon js-search-header{% if section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-split' %} medium-up--hide{% endif %}"
+      >
+        <img
+          class="icon icon-search"
+          src="https://cdn.shopify.com/s/files/1/0586/5812/7977/files/search-icon_cb99dfae-0ce7-4ca3-b9ba-4ef0d9efb9e5.png?v=1748340824"
+          alt=""
+          width=""
+          height=""
+        >
+        <!--
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64">
+            <title>icon-search</title><path d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58ZM54 54 41.94 42"/>
+          </svg>
+        -->
+
+        <span class="icon__fallback-text">{{ 'general.search.title' | t }}</span>
+      </a>
+    {%- endif -%}
+
+    {%- if section.settings.main_menu_alignment == 'left'
+      or section.settings.main_menu_alignment == 'left-center'
+      or section.settings.main_menu_alignment == 'left-drawer'
+    -%}
+      <button
+        type="button"
+        class="site-nav__link site-nav__link--icon js-drawer-open-nav{% if section.settings.main_menu_alignment == 'left' or section.settings.main_menu_alignment == 'left-center' %} medium-up--hide{% endif %}"
+        aria-controls="NavDrawer"
+      >
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-hamburger" viewBox="0 0 64 64">
+          <title>icon-hamburger</title><path d="M7 15h51M7 32h43M7 49h51"/>
+        </svg>
+        <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+      </button>
+    {%- endif -%}
+
+    <a
+      href="{{ routes.cart_url }}"
+      class="site-nav__link site-nav__link--icon js-drawer-open-cart"
+      aria-controls="CartDrawer"
+      data-icon="{{ settings.cart_icon }}"
+    >
+      <span class="cart-link" alt="Cart" title="Cart">
+        {%- if settings.cart_icon == 'cart' -%}
+          <svg width="20" height="29" viewBox="0 0 23 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.8735 24.7037L21.2702 6.64969C21.2359 6.24888 20.898 5.9454 20.5029 5.9454H17.2048C17.159 2.93354 14.6968 0.5 11.6735 0.5C8.65019 0.5 6.18802 2.93354 6.14221 5.9454H2.84405C2.44323 5.9454 2.11113 6.24888 2.07677 6.64969L0.4735 24.7037C0.4735 24.7266 0.467773 24.7495 0.467773 24.7724C0.467773 26.828 2.35162 28.5 4.67064 28.5H18.6764C20.9954 28.5 22.8792 26.828 22.8792 24.7724C22.8792 24.7495 22.8792 24.7266 22.8735 24.7037ZM11.6735 2.04601C13.8436 2.04601 15.613 3.78671 15.6588 5.9454H7.68822C7.73403 3.78671 9.50336 2.04601 11.6735 2.04601ZM18.6764 26.954H4.67064C3.21624 26.954 2.03669 25.992 2.01379 24.8067L3.54835 7.49714H6.13649V9.84478C6.13649 10.2742 6.48004 10.6178 6.90949 10.6178C7.33894 10.6178 7.6825 10.2742 7.6825 9.84478V7.49714H15.6588V9.84478C15.6588 10.2742 16.0023 10.6178 16.4318 10.6178C16.8612 10.6178 17.2048 10.2742 17.2048 9.84478V7.49714H19.7929L21.3332 24.8067C21.3103 25.992 20.125 26.954 18.6764 26.954Z" fill="white"></path>
+          </svg>
+        {%- elsif settings.cart_icon == 'bag-minimal' -%}
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            role="presentation"
+            class="icon icon-bag-minimal"
+            viewBox="0 0 64 64"
+          >
+            <title>icon-bag-minimal</title><path stroke="null" fill-opacity="null" stroke-opacity="null" fill="null" d="M11.375 17.863h41.25v36.75h-41.25z"/><path stroke="null" d="M22.25 18c0-7.105 4.35-9 9.75-9s9.75 1.895 9.75 9"/>
+          </svg>
+        {%- else -%}
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-bag" viewBox="0 0 64 64">
+            <g fill="none" stroke="#000" stroke-width="2"><path d="M25 26c0-15.79 3.57-20 8-20s8 4.21 8 20"/><path d="M14.74 18h36.51l3.59 36.73h-43.7z"/></g>
+          </svg>
+        {%- endif -%}
+        <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
+        <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"
+          ><span class="cart-count">{{ cart.item_count }}</span></span
+        >
+      </span>
+    </a>
+  </div>
+</div>

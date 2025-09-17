@@ -1,0 +1,48 @@
+{% comment %}
+  {%- assign header_font = settings.type_header_font_family -%}
+  {%- assign base_font = settings.type_base_font_family -%}
+  {%- assign base_font_bold = base_font | font_modify: 'weight', '600' -%}
+  {%- assign base_font_italic = base_font | font_modify: 'style', 'italic' -%}
+  {%- assign base_font_bold_italic = base_font_bold | font_modify: 'style', 'italic' -%}
+{% endcomment %}
+
+{%- style -%}
+    {% comment %}     {{ header_font | font_face: font_display: 'swap' }}
+            {{ base_font | font_face: font_display: 'swap' }}
+
+            {{ base_font_bold | font_face: font_display: 'swap' }}
+            {{ base_font_italic | font_face: font_display: 'swap' }}
+            {{ base_font_bold_italic | font_face: font_display: 'swap' }}{% endcomment %}
+
+
+  @font-face {
+      font-family: 'Avenir Black';
+      src: url("https://cdn.shopify.com/s/files/1/0586/5812/7977/files/Avenir-Black.woff?v=1714045165") format("woff"),
+           url("https://cdn.shopify.com/s/files/1/0586/5812/7977/files/Avenir-Black.woff2?v=1714045165") format("woff2"),
+           url("https://cdn.shopify.com/s/files/1/0586/5812/7977/files/Avenir-Black.ttf?v=1714045166") format("truetype"),
+           url("https://cdn.shopify.com/s/files/1/0586/5812/7977/files/Avenir-Black.eot?v=1714045166") format('embedded-opentype');
+      font-style: normal;
+      font-display: swap;
+      font-weight: bold;
+  }
+
+  @font-face {
+      font-family: 'Avenir';
+      src: url("https://cdn.shopify.com/s/files/1/0586/5812/7977/files/avenir-roman.woff?v=1714045140") format("woff"),
+           url("https://cdn.shopify.com/s/files/1/0586/5812/7977/files/avenir-roman.woff2?v=1714045140") format("woff2"),
+           url("https://cdn.shopify.com/s/files/1/0586/5812/7977/files/avenir-roman.ttf?v=1714045141") format("truetype"),
+           url("https://cdn.shopify.com/s/files/1/0586/5812/7977/files/avenir-roman.eot?v=1714045141") format('embedded-opentype');
+      font-style: normal;
+      font-display: swap;
+      font-weight: 100;
+  }
+
+
+           body,div,a,p,h6,.btn,span, button, a.btn, button.btn, select option, input, select, textarea, .variant-input-wrap label {
+      font-family: 'Avenir' !important;
+    }
+
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, strong, b{
+      font-family: 'Avenir Black' !important;
+    }
+{%- endstyle -%}

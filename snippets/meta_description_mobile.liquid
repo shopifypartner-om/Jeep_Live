@@ -1,0 +1,70 @@
+<div class="faq-accordion-section mobile">
+  {% assign mdescription = product.description %}
+  
+  {% for block in section.blocks %}
+    {% if block.settings.description != blank %}
+    <div class="faq-accordion">
+      <h4 class="faq-acc-heading" style="background-color:{{section.settings.faq_acc_heading_color}}">
+        {%- if block.settings.mtitlename != blank -%}
+          {{- block.settings.mtitlename -}}
+        {% endif %}
+      </h4>
+      <div class="faq-acc-content">
+        {% if forloop.index == 1 %}
+          {%- if block.settings.mdescription != blank -%}
+            {{ block.settings.mdescription }}
+          {%- else -%}
+            {{ mdescription }}
+          {% endif %}
+        {% elsif forloop.index == 2 %}
+          {% assign metafield_dataq = product.metafields.custom.feature.value %}
+          <div class="maintable">
+            <div class="main_table">
+              {% for paragraph in metafield_dataq %}
+                {% if paragraph != blank %}
+                  <p class="{{ forloop.index }}">{{ paragraph }}</p>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% else %}
+          {{ block.settings.mdescription }}
+        {%- endif -%}
+      </div>
+    </div>
+    {% endif %}
+    
+  {% endfor %}
+</div>
+<script>
+  $('.faq-acc-heading').click(function(e) {
+
+        e.preventDefault();
+      let $this = $(this);
+      if ($this.hasClass('show-acc')) {
+          $this.removeClass('show-acc');
+          $this.next().slideUp(150);
+      } else {
+          $this.parent().parent().find('.faq-acc-heading').removeClass('show-acc');
+          $this.parent().parent().find('.faq-acc-content').slideUp(150);
+          $this.toggleClass('show-acc');
+          $this.next().slideToggle(150);
+      }
+  });
+</script>
+<style>
+  .faq-acc-content{
+    display:none;
+    }
+    .faq-acc-heading:after{
+    content: "+";
+    float:right;
+    }
+    .faq-acc-heading.show-acc:after{
+    content: "-";
+    }
+    h2.faq-acc-heading {
+      padding: 10px;
+      cursor:pointer;
+  }
+</style>

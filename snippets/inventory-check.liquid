@@ -1,0 +1,28 @@
+{% comment %}
+  <div class="hide">
+    {% for variant in product.variants %}
+      <div class="variant">
+        {% if variant.inventory_management == "shopify" %}
+          {% if variant.inventory_quantity > 0 %}
+  <input type="hidden"  class="current_invetory hide" value="{{ variant.inventory_quantity }}">
+          {% else %}
+
+          {% endif %}
+        {% else %}
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% endcomment %}
+<div class="hide">
+  {% for variant in product.variants %}
+    {% if variant.inventory_management == 'shopify' %}
+      <input
+        type="hidden"
+        class="variant-inventory"
+        data-variant-id="{{ variant.id }}"
+        data-inventory="{{ variant.inventory_quantity }}"
+      >
+    {% endif %}
+  {% endfor %}
+</div>

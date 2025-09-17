@@ -1,0 +1,193 @@
+{%- if settings.cart_type == 'drawer' -%}
+  <div id="CartDrawer" class="drawer drawer--right">
+    <form
+      id="CartDrawerForm"
+      action="{{ routes.cart_url }}"
+      method="post"
+      novalidate
+      class="drawer__contents"
+      data-location="cart-drawer"
+    >
+      <div class="drawer__fixed-header">
+        <div class="drawer__header appear-animation appear-delay-1">
+          <div class="h2 drawer__title">{{ 'cart.general.title' | t }}</div>
+          <div class="drawer__close">
+            <button type="button" class="drawer__close-button js-drawer-close">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64">
+                <title>Close Cart</title><path d="m19 17.61 27.12 27.13m0-27.12L19 44.74"/>
+              </svg>
+              <span class="icon__fallback-text">{{ 'cart.general.close_cart' | t }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer__inner">
+        <div class="drawer__scrollable">
+          <div id="errorMessageContainer"></div>
+          <div data-products class="appear-animation appear-delay-2"></div>
+          {% if settings.cart_notes_enable %}
+            <div class="appear-animation appear-delay-3">
+              <label for="CartNoteDrawer">{{ 'cart.general.note' | t }}</label>
+              <textarea name="note" class="input-full cart-notes" id="CartNoteDrawer">{{ cart.note }}</textarea>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="drawer__footer appear-animation appear-delay-4">
+          {% comment %}
+            <p id="business-form-btn" onclick="toggleBusinessForm()" class="cart-attribute__field text-left">
+              <b><span>Click Here</span> to Enter Business Details</b>
+            </p>
+            <div class="business-form hidden">
+              <p class="cart-attribute__field text-left">
+                <label for="company_name"> Company Name: </label>
+                <input id="company_name" type="text" name="attributes[company_name]" value="">
+              </p>
+              <p class="cart-attribute__field text-left">
+                <label for="gstin_number"> GSTIN Number: </label>
+                <input
+                  id="gstin_number"
+                  onchange="validateGSTNumber()"
+                  type="text"
+                  name="attributes[gstin_number]"
+                  value=""
+                >
+              </p>
+              <script type="text/javascript">
+                function validateGSTNumber(){var e=document.getElementById("gstin_number").value;if(new RegExp("^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$").test(e))return!0;alert("Please Enter Valid GSTIN Number"),document.getElementById("gstin_number").value="",setTimeout(function(){document.getElementById("gstin_number").focus()},500)}
+              </script>
+
+            </div>
+          {% endcomment %}
+
+          <div data-discounts>
+            {% if cart.cart_level_discount_applications != blank %}
+              <div class="cart__discounts cart__item-sub cart__item-row">
+                <div>{{ 'cart.general.discounts' | t }}</div>
+                <div class="text-right">
+                  {% for cart_discount in cart.cart_level_discount_applications %}
+                    <div class="cart__discount">
+                      {{ cart_discount.title }} (-{{ cart_discount.total_allocated_amount | money }})
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="cart__item-sub cart__item-row">
+            <div class="ajaxcart__subtotal">{{ 'cart.general.subtotal' | t }}</div>
+            <div data-subtotal>{{ cart.total_price | money }}</div>
+          </div>
+
+          <div class="cart__item-row text-center">
+            <small>
+              {{ 'cart.general.shippingtext_at_checkout' | t -}} <br>
+              {{ 'cart.general.shipping_at_checkout' | t -}}
+              <br>
+            </small>
+          </div>
+
+          {% if settings.cart_terms_conditions_enable %}
+            <div class="cart__item-row cart__terms">
+              <input type="checkbox" id="CartTermsDrawer" class="cart__terms-checkbox">
+              <label for="CartTermsDrawer">
+                {% if settings.cart_terms_conditions_page != blank %}
+                  {{ 'cart.general.terms_html' | t: url: settings.cart_terms_conditions_page.url }}
+                {% else %}
+                  {{ 'cart.general.terms' | t }}
+                {% endif %}
+              </label>
+            </div>
+          {% endif %}
+
+          <div class="cart__checkout-wrapper">
+            <div class="custom-cart-btn">
+              <a class="view-cart" href="{{ '/cart' | within: 'link' }}">View Cart</a>
+              <button
+                type="submit"
+                name="checkout"
+                data-terms-required="{{ settings.cart_terms_conditions_enable }}"
+                class="btn cart__checkout"
+              >
+                {{ 'cart.general.checkout' | t }}
+              </button>
+            </div>
+            {% if additional_checkout_buttons and settings.cart_additional_buttons %}
+              <div class="additional-checkout-buttons additional-checkout-buttons--vertical">
+                {{ content_for_additional_checkout_buttons }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer__cart-empty appear-animation appear-delay-2">
+        <div class="drawer__scrollable">
+          {{ 'cart.general.empty' | t }}
+        </div>
+      </div>
+    </form>
+  </div>
+{%- endif -%}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const btnTrigger = document.getElementById("business-form-btn");
+  const businessForm = document.querySelector(".business-form");
+
+  if (btnTrigger && businessForm) {
+    btnTrigger.addEventListener("click", function () {
+      businessForm.classList.toggle("hidden");
+    });
+  } else {
+    console.warn("Missing #business-form-btn or .business-form in DOM");
+  }
+});
+</script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Listen for input changes on quantity inputs
+    document.addEventListener("change", async function (e) {
+      if (e.target.classList.contains("cart__qty-input")) {
+        const input = e.target;
+        const newQuantity = parseInt(input.value);
+        const variantId = parseInt(input.getAttribute("data-variant-id"));
+
+        if (!variantId || isNaN(newQuantity)) return;
+
+        try {
+          const response = await fetch("/cart.js");
+          const cart = await response.json();
+
+          const item = cart.items.find((i) => i.variant_id === variantId);
+
+          if (!item) return;
+
+          const inventory = item.variant.inventory_quantity;
+          const currentQuantity = item.quantity;
+
+          // Allow decrease or stay the same
+          if (newQuantity <= inventory) {
+            clearInventoryError();
+          } else {
+            input.value = currentQuantity;
+            showInventoryError("Sorry! We don't have any more units for this item.");
+          }
+        } catch (err) {
+          console.error("Error checking inventory:", err);
+        }
+      }
+    });
+
+    function showInventoryError(message) {
+      const container = document.getElementById("errorMessageContainer");
+      container.innerHTML = `<div class="cart-error-message" style="color: red; margin: 1em 0;">${message}</div>`;
+    }
+
+    function clearInventoryError() {
+      const container = document.getElementById("errorMessageContainer");
+      container.innerHTML = "";
+    }
+  });
+</script>

@@ -1,0 +1,128 @@
+<style>
+  {%- if settings.color_announcement == settings.color_body_bg -%}
+    .announcement-bar {
+      border-bottom: 1px solid;
+    }
+  {%- endif -%}
+
+  body {
+    padding-top: 40px;
+  }
+
+  .announcement-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+
+    /* Shopify settings colors */
+    background-color: {{ settings.color_announcement | default: '#f4f4f4' }};
+    color: {{ settings.color_announcement_text | default: '#000000' }};
+  }
+
+  .site-header--opening {
+    top: 50px !important;
+    position: fixed;
+  }
+
+  .site-header {
+    top: 15px;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding-top: 40px;
+    }
+
+    .header-layout--center {
+    align-items: center;
+    padding: 42px 0 0 1px;
+}
+        
+}
+
+        
+
+
+    .announcement-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 9999;
+
+      /* Shopify settings colors with fallback */
+      background-color: {{ settings.color_announcement | default: '#f4f4f4' }};
+      color: {{ settings.color_announcement_text | default: '#000000' }};
+    }
+
+    .site-header--opening {
+      top: 50px !important;
+      position: fixed;
+    }
+
+    .site-header {
+      top: 15px;
+    }
+  }
+</style>
+
+
+
+
+
+{%- render 'announcement-bar', section: section -%}
+
+{% schema %}
+{
+  "name": "t:sections.header.settings.header_announcement_bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "announcement_compact",
+      "label": "t:sections.header.settings.announcement_compact.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "announcement_enable",
+      "label": "Enable Announcement"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "announcement",
+      "name": "t:sections.header.blocks.announcement.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "t:sections.header.blocks.announcement.settings.text.label",
+          "default": "Hassle-free returns"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "t:sections.header.blocks.announcement.settings.link_text.label",
+          "default": "30-day postage paid returns"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.header.blocks.announcement.settings.link.label"
+        }
+      ]
+    }
+  ],
+  "default": {
+    "settings": {}
+  },
+  "disabled_on": {
+    "groups": ["footer", "custom.popups"]
+  }
+}
+{% endschema %}

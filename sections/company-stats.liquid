@@ -1,0 +1,82 @@
+{{ 'company-stats.css' | asset_url | stylesheet_tag: preload: true }}
+<div class="page-width">
+  <div class="stats-container-outer">
+    <div class="stats-container" style="background-color: {{ section.settings.stats-background }}">
+      <div class="stats-col">
+        <span><img src="{{ section.settings.icon1 | image_url }}" alt="" width="" height=""></span>
+        <span>{{ section.settings.stat1 }}</span>
+      </div>
+      <div class="stats-col">
+        <span><img src="{{ section.settings.icon2 | image_url }}" alt="" width="" height=""></span>
+        <span>{{ section.settings.stat2 }}</span>
+      </div>
+      <div class="stats-col">
+        <span><img src="{{ section.settings.icon3 | image_url }}" alt="" width="" height=""></span>
+        <span>{{ section.settings.stat3 }}</span>
+      </div>
+      <div class="stats-col">
+        <span><img src="{{ section.settings.icon4 | image_url }}" alt="" width="" height=""></span>
+        <span>{{ section.settings.stat4 }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+{%- schema %}
+{
+  "name": "Company Stats",
+  "class": "index-section company-stats",
+  "settings": [
+    {
+      "type": "color",
+      "id": "stats-background",
+      "label": "Select Background Color"
+    },
+    {
+      "type": "text",
+      "id": "stat1",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon1",
+      "label": "Select Icon"
+    },
+    {
+      "type": "text",
+      "id": "stat2",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon2",
+      "label": "Select Icon"
+    },
+    {
+      "type": "text",
+      "id": "stat3",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon3",
+      "label": "Select Icon"
+    },
+    {
+      "type": "text",
+      "id": "stat4",
+      "label": "Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon4",
+      "label": "Select Icon"
+    }
+  ],
+   "presets": [
+    {
+      "name": "Company Stats",
+      "blocks": []
+    }
+  ]
+}
+{%- endschema %}

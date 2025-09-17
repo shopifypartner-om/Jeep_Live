@@ -1,0 +1,70 @@
+{{ 'home-cta-new.css' | asset_url | stylesheet_tag: preload: true }}
+<div class="page-width">
+  <div
+    class="cta"
+    style="background: {{ section.settings.background_color }} url({{ section.settings.background_image | img_url: 'master' }}) no-repeat scroll;"
+  >
+    <div class="title-section">
+      <h2>{{ section.settings['cta-title'] }}</h2>
+      <a href="{{ section.settings.cta-url }}">{{ section.settings['btn-text'] }}</a>
+    </div>
+    {% if section.settings.upload_image %}
+      <div class="image-section">
+        <!-- <img src="{{ section.settings.upload_image | img_url: 'master' }}" alt="" width="" height=""> -->
+        {% assign ctaBanner = section.settings.upload_image %}
+        {%- render 'image-element',
+          img: ctaBanner,
+          widths: '360, 540, 720, 900, 1080',
+          classes: classes,
+          sizes: sizes,
+          sizeVariable: sizeVariable,
+          fallback: fallback
+        -%}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Home CTA Section",
+  "class": "index-section home-cta-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cta-title",
+      "label": "Title"
+    },
+    {
+      "type": "url",
+      "id": "cta-url",
+      "label": "Select URL"
+    },
+    {
+      "type": "text",
+      "id": "btn-text",
+      "label": "Button Label"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Select background color"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Select background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "upload_image",
+      "label": "Add Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home CTA Section",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

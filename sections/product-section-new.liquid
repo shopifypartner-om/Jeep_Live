@@ -1,0 +1,151 @@
+{%- style -%}
+  .meta_description {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    max-width: 100%;
+    margin: auto;
+  }
+  @media screen and (min-width: 751px) {
+     .meta_description{
+      display: block;
+    }
+    .faq-accordion-section{
+      display: none;
+    }
+  .main_table {
+       display: flex;
+       align-items: normal;
+       flex-wrap: wrap;
+    }
+    .Sub_table {
+       width: 50%;
+       border-bottom: 1px solid;
+      margin: 1px auto 1px auto;
+      padding: 5px 1px 5px 1px;
+    }
+     .Sub_table:nth-child( odd ) {
+          text-align: left;
+       font-weight:600;
+       width:20%;
+    }
+    .Sub_table:nth-child( even ) {
+          text-align: right;
+      width:80%;
+    }
+  
+  }
+  @media screen and (max-width: 750px) {
+    .meta_description{
+      padding-top: {{ section.settings.mpadding_top }}px;
+      padding-bottom: {{ section.settings.mpadding_bottom }}px;
+      max-width: 100%;
+    margin: auto;
+    }
+   .meta_description{
+      display: none;
+    }
+    .faq-accordion-section{
+      display: block;
+    }
+        .maintable{
+       width: 100%;
+       margin: 20px auto;
+       text-align: left;
+    }
+  .main_table {
+       display: flex;
+       align-items: left;
+       flex-wrap: wrap;
+    }
+    .Sub_table {
+       width: 100%;
+       border-bottom: 1px solid;
+      margin: 1px auto 1px auto;
+      padding: 5px 1px 5px 1px;
+    }
+     .Sub_table:nth-child( odd ) {
+          text-align: left;
+       font-weight:600;
+    }
+    .Sub_table:nth-child( even ) {
+          text-align: left;
+    }
+  }
+{%- endstyle -%}
+ 
+<div class="meta_{{ section.id }} page-width">
+  {% render 'meta_description_desktop', block: block %}
+  {% render 'meta_description_mobile', block: block %}
+</div>
+ 
+{% schema %}
+{
+  "name": "Meta Description",
+  "settings": [
+  ],
+   "blocks": [
+  {
+    "type": "Description",
+    "name": "Tab",
+    "limit": 5,
+  "settings": [
+     {
+      "type": "header",
+      "content": "Desktop Description"
+    },
+      {
+      "type": "text",
+      "id": "titlename",
+      "label": "Title",
+        "default": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Meta Description"
+    },
+     {
+      "type": "header",
+      "content": "Mobile Description"
+    },
+      {
+      "type": "text",
+      "id": "mtitlename",
+      "label": "Title",
+        "default": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "mdescription",
+      "label": "Meta Description"
+    }
+  ]
+  }
+   ],
+  "presets": [
+  {
+    "name": "Meta Description",
+    "blocks": [
+       {
+            "type": "Description"
+          },
+          {
+            "type": "Description"
+          },
+          {
+            "type": "Description"
+          },
+          {
+            "type": "Description"
+          },
+          {
+            "type": "Description"
+          }
+    ]
+  }
+],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

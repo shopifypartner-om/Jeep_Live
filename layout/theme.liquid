@@ -1,0 +1,265 @@
+{%- comment -%}
+This file has been modified by the Yoast SEO for Shopify app.
+You can learn more about this (and learn how to cleanly revert these changes) at https://yoa.st/removing-theme-changes.
+{%- endcomment -%}
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ settings.text_direction }}">
+  <head>{% render 'yoast-seo' %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_button }}">
+    {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<link rel="canonical" href="{{ canonical_url }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://productreviews.shopifycdn.com">
+    <link rel="dns-prefetch" href="https://ajax.googleapis.com">
+    <link rel="dns-prefetch" href="https://maps.googleapis.com">
+    <link rel="dns-prefetch" href="https://maps.gstatic.com">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {%- endif -%}
+
+    {%- render 'seo-title' -%}
+
+    {%- if page_description -%}
+      {%- comment -%}Auto-disabled. Yoast plugin is taking care of Meta Tags output.{%- endcomment -%}
+{%- if disabled_by_yoast_seo -%}
+<meta name="description" content="{{ page_description | escape }}">
+{%- comment -%} End Yoast auto-disable. {%- endcomment -%}
+{%- endif -%}
+    {%- endif -%}
+
+    {%- render 'social-meta-tags' -%}
+
+    {%- render 'font-face' -%}
+    {{ 'theme.css' | asset_url | stylesheet_tag: preload: true }}
+    {%- render 'css-variables' -%}
+    {{ 'slick.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'slick-theme.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'custom-om.css' | asset_url | stylesheet_tag: preload: true }}
+    {{ 'responsive.css' | asset_url | stylesheet_tag: preload: true }}
+    <script>
+      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+
+      window.theme = window.theme || {};
+      theme.routes = {
+        home: "{{ routes.root_url }}",
+        cart: "{{ routes.cart_url | append: '.js' }}",
+        cartPage: "{{ routes.cart_url }}",
+        cartAdd: "{{ routes.cart_add_url | append: '.js' }}",
+        cartChange: "{{ routes.cart_change_url | append: '.js' }}",
+        search: "{{ routes.search_url }}",
+        predictiveSearch: "{{ routes.predictive_search_url }}"
+      };
+      theme.strings = {
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        inStockLabel: {{ 'products.product.in_stock_label' | t | json }},
+        oneStockLabel: {{ 'products.product.stock_label.one' | t: count: '[count]' | json }},
+        otherStockLabel: {{ 'products.product.stock_label.other' | t: count: '[count]' | json }},
+        willNotShipUntil: {{ 'products.product.will_not_ship_until' | t: date: '[date]' | json }},
+        willBeInStockAfter: {{ 'products.product.will_be_in_stock_after' | t: date: '[date]' | json }},
+        waitingForStock: {{ 'products.product.waiting_for_stock' | t | json }},
+        savePrice: {{ 'products.general.save_html' | t: saved_amount: '[saved_amount]' | json }},
+        cartEmpty: {{ 'cart.general.empty' | t | json }},
+        cartTermsConfirmation: {{ 'cart.general.terms_confirm' | t | json }},
+        searchCollections: {{ 'general.search.collections' | t | json }},
+        searchPages: {{ 'general.search.pages' | t | json }},
+        searchArticles: {{ 'general.search.articles' | t | json }},
+        productFrom: {{ 'products.general.from_text_html' | t: price: '' | json }},
+        maxQuantity: {{ 'cart.general.max_quantity' | t: quantity: '[quantity]', title: '[title]' | json }}
+      };
+      theme.settings = {
+        cartType: {{ settings.cart_type | json }},
+        isCustomerTemplate: {% if request.page_type contains 'customers/' %}true{% else %}false{% endif %},
+        moneyFormat: {{ shop.money_format | json }},
+        saveType: {{ settings.product_save_type | json }},
+        productImageSize: {{ settings.product_grid_image_size | json }},
+        productImageCover: {{ settings.product_grid_image_fill }},
+        predictiveSearch: {{ settings.predictive_search_enabled }},
+        predictiveSearchType: {{ settings.search_type | json }},
+        predictiveSearchVendor: {{ settings.predictive_search_show_vendor | json }},
+        predictiveSearchPrice: {{ settings.predictive_search_show_price | json }},
+        quickView: {{ settings.quick_shop_enable }},
+        themeName: 'Impulse',
+        themeVersion: "7.4.1"
+      };
+    </script>
+
+    {{ content_for_header }}
+
+    <script src="{{ 'vendor-scripts-v11.js' | asset_url | split: '?' | first }}" defer="defer"></script>
+
+    {%- if shop.enabled_currencies.size > 1 -%}
+      <link rel="stylesheet" href="{{ 'country-flags.css' | asset_url | split: '?' | first }}">
+    {%- endif -%}
+
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+    {%- if request.page_type contains 'customers/' -%}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
+    {% if request.design_mode %}
+      <script src="https://api.archetypethemes.co/design-mode.js" defer="defer"></script>
+    {% endif %}
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js" asyn></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js" async></script>
+    <script src="{{ 'slick.min.js' | asset_url }}" defer="defer"></script>
+    <!-- <script src="{{ 'lazysizes_min.js'| asset_url }}" async="async"></script> -->
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '1266595657903739');
+      fbq('track', 'PageView');
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=1266595657903739&ev=PageView&noscript=1"
+    ></noscript>
+    <!-- End Meta Pixel Code -->
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TJQW6FMX');
+    </script>
+    <!-- End Google Tag Manager -->
+  </head>
+
+  <body
+    class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}"
+    data-center-text="{{ settings.type_body_align_text }}"
+    data-button_style="{{ settings.button_style }}"
+    data-type_header_capitalize="{{ settings.type_header_capitalize }}"
+    data-type_headers_align_text="{{ settings.type_headers_align_text }}"
+    data-type_product_capitalize="{{ settings.type_product_capitalize }}"
+    data-swatch_style="{{ settings.swatch_style }}"
+    {% if settings.disable_animations %}
+      data-disable-animations="true"
+    {% endif %}
+  >
+    <a class="in-page-link visually-hidden skip-link" href="#MainContent">
+      {{- 'general.accessibility.skip_to_content' | t -}}
+    </a>
+
+    <div id="PageContainer" class="page-container">
+      <div class="transition-body">
+        {%- sections 'header-group' -%}
+        {%- sections 'popup-group' -%}
+
+        <main class="main-content" id="MainContent">
+          {{ content_for_layout }}
+        </main>
+
+        {%- sections 'footer-group' -%}
+      </div>
+    </div>
+
+    {%- liquid
+      render 'video-modal'
+      render 'photoswipe-template'
+      render 'tool-tip'
+    -%}
+
+    {% comment %} Image markup used when building product grid item via JS {% endcomment %}
+    <template id="naturalImageMarkup">
+      <div class="image-wrap" style="height: 0;">
+        <image-element data-aos="image-fade-in" data-aos-offset="150">
+          <img class="grid-product__image image-element" width height src srcset loading="lazy" alt>
+        </image-element>
+      </div>
+    </template>
+    <template id="fixedRatioImageMarkup">
+      <div class="grid__image-ratio">
+        <image-element data-aos="image-fade-in" data-aos-offset="150">
+          <img class="image-element" width height src srcset loading="lazy" alt>
+        </image-element>
+      </div>
+    </template>
+    <script src="{{ 'om-custom-js.js' | asset_url }}" defer=""></script>
+    <button id="scrollToTopBtn">☝️</button>
+    <script>
+        function checkAndHideShareButton() {
+        // Check if the element with class "empty-wishlist" exists
+        if (document.querySelector('.empty-wishlist')) {
+          const shareButton = document.querySelector('.sharebutton');
+          if (shareButton) {
+            shareButton.style.display = 'none';
+          }
+        }
+      }
+
+      // Call the function initially to check on page load
+      checkAndHideShareButton();
+
+      // Set up periodic checking using setInterval (e.g., every 2 seconds)
+      setInterval(checkAndHideShareButton, 2000);
+    </script>
+    <script>
+           document.querySelectorAll('.js-qty__adjust').forEach(button => {
+        button.addEventListener('click', function() {
+          const input = this.parentElement.querySelector('.js-qty__num');
+          let quantity = parseInt(input.value);
+          const lineKey = input.getAttribute('data-id');
+
+          if (this.classList.contains('js-qty__adjust--minus')) {
+            quantity = Math.max(0, quantity - 1);
+          } else {
+            quantity += 1;
+          }
+
+          fetch('/cart/change.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              id: lineKey,
+              quantity: quantity
+            })
+          })
+          .then(response => response.json())
+          .then(cart => {
+            // Update the cart's HTML here
+            // For example, re-render the cart items and order summary
+          });
+        });
+      });
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const closeBtn = document.querySelector('.btn--close-search');
+        const searchInput = document.querySelector('.search__input');
+        const predictiveResults = document.querySelector('#predictive-search');
+
+        if (closeBtn && searchInput) {
+          closeBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            searchInput.value = '';
+            searchInput.focus();
+            if (predictiveResults) predictiveResults.style.display = 'none';
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+{{ 'home-collection-new.css' | asset_url | stylesheet_tag: preload: true }}
+<div class="page-width">
+  <div class="category-list">
+    <div class="home-category">
+      {% for block in section.blocks %}
+        <div class="category-block">
+          {% assign classes = 'collection-image--' | append: indicator %}
+          {% assign imagecat = block.settings.category_image %}
+          {%- render 'image-element',
+            img: imagecat,
+            widths: '360, 540, 720, 900, 1080',
+            classes: classes,
+            sizes: sizes,
+            sizeVariable: sizeVariable,
+            fallback: fallback
+          -%}
+          <div class="c-name">
+            <h2>
+              {{ block.settings['category-name'] -}}
+            </h2>
+            <a href="{{ block.settings.collection_link_cta }}" class="view-more">Shop Now</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+    "name": "Home Category",
+    "settings": [
+        {
+            "type": "range",
+            "id": "num_category",
+            "label": "Number of Category to Display",
+            "min": 2,
+            "max": 4,
+            "default": 2
+        }
+    ],
+    "class": "home-category index-section",
+    "blocks": [
+        {
+            "type": "category-list",
+            "name": "Category",
+            "settings": [
+                {
+            "type": "image_picker",
+            "id": "category_image",
+            "label": "Select Image"
+        },
+                {
+            "type": "text",
+            "id": "category-name",
+            "label": "Enter Title"
+        },
+                {
+            "type": "url",
+            "id": "collection_link_cta",
+            "label": "Add CTA"
+        }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Home Category",
+            "blocks": []
+        }
+    ]
+}
+{% endschema %}

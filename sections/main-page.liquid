@@ -1,0 +1,22 @@
+<div class="page-width page-width--narrow page-content">
+ 
+  <header class="section-header">
+    <div class="page-width custom-nav-sec">
+      <div class="new-breadcrumb">
+        {%- render 'breadcrumbs' | t | replace: ':', '' -%}
+      </div>
+      </div>
+    <h1 class="section-header__title">{{ page.title }}</h1>    
+  </header>
+
+  <div class="rte rte--nomargin">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-page.name",
+  "tag": "section"
+}
+{% endschema %}

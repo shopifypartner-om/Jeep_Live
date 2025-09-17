@@ -1,0 +1,50 @@
+<div
+  class="page-width newsletter-section-container"
+  style="background-image: url('{{ section.settings.background_image | img_url: 'master' }}');"
+>
+  <div class="newsletter-section">
+    <div class="form-section">
+      <h1>{{ section.settings.title }}</h1>
+      
+      <div class="act-btn">
+      <a class="mailto" href="mailto:{{ section.settings.EnteremailId }}">{{ section.settings.btn-action }}</a>
+      </div>
+      
+      {% comment %} {% render 'newsletter-form' %} {% endcomment %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "btn-action",
+      "label": "Button Label"
+    },
+    {
+      "type": "text",
+      "id": "EnteremailId",
+      "label": "Enter Email"
+    }
+  ],
+    "presets": [
+        {
+            "name": "Newsletter Section",
+            "blocks": []
+        }
+    ]
+}
+{% endschema %}

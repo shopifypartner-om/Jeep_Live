@@ -1,0 +1,486 @@
+{%- paginate customer.addresses by 5 -%}
+  <div class="page-width page-content">
+    {%- if settings.show_breadcrumbs -%}
+      <nav
+        class="breadcrumb{% if settings.type_headers_align_text %} text-center{% endif %}"
+        role="navigation"
+        aria-label="breadcrumbs"
+      >
+        <a href="{{ routes.account_url }}">{{ 'customer.account.title' | t }}</a>
+        <span class="divider" aria-hidden="true">/</span>
+        {{ 'customer.addresses.title' | t }}
+      </nav>
+    {%- endif -%}
+
+    <header class="section-header{% unless settings.type_headers_align_text %} section-header--with-link{% endunless %}">
+      <h1 class="section-header__title">{{ 'customer.addresses.title' | t }}</h1>
+      <button type="button" class="btn btn--secondary btn--small section-header__link address-new-toggle">
+        {{ 'customer.addresses.add_new' | t }}
+      </button>
+    </header>
+    <div class="grid accounts">
+      <div class="grid__item medium-up--one-third nav-col">
+        <div class="my-account-menu">
+          <ul>
+            <li class="order"><a href="{{ routes.account_url }}">Order History</a></li>
+            <li class="editProfile">
+              <a href="/a/profile" type="button" class="button button--full-width button--secondary">My Profile</a>
+            </li>
+            <li class="track"><a target="_blank" href="/apps/track123">Track Order</a></li>
+            <li class="wishlist"><a target="_blank" href="/a/wishlist">My Wishlist</a></li>
+            <li class="address active"><a href="{{ routes.account_addresses_url }}">Manage Address</a></li>
+            <li class="logout"><a href="{{ routes.account_logout_url }}">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid__item medium-up--two-thirds details-col">
+        <div id="AddressNewForm" class="form-vertical js-address-form text-left hide">
+          {%- form 'customer_address', customer.new_address -%}
+            <h2>{{ 'customer.addresses.add_new' | t }}</h2>
+
+            <div class="grid grid--small">
+              <div class="grid__item one-half small--one-whole">
+                <label for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressFirstNameNew"
+                  class="input-full"
+                  name="address[first_name]"
+                  value="{{form.first_name}}"
+                  autocapitalize="words"
+                  required
+                >
+              </div>
+
+              <div class="grid__item one-half small--one-whole">
+                <label for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressLastNameNew"
+                  class="input-full"
+                  name="address[last_name]"
+                  value="{{form.last_name}}"
+                  autocapitalize="words"
+                  required
+                >
+              </div>
+            </div>
+
+            <label for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+            <input
+              type="text"
+              id="AddressCompanyNew"
+              class="input-full"
+              name="address[company]"
+              value="{{form.company}}"
+              autocapitalize="words"
+            >
+
+            <label for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+            <input
+              type="text"
+              id="AddressAddress1New"
+              class="input-full"
+              name="address[address1]"
+              value="{{form.address1}}"
+              autocapitalize="words"
+              required
+            >
+
+            <label for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+            <input
+              type="text"
+              id="AddressAddress2New"
+              class="input-full"
+              name="address[address2]"
+              value="{{form.address2}}"
+              autocapitalize="words"
+            >
+
+            <div class="grid grid--small">
+              <div class="grid__item medium-up--one-half">
+                <label for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressCityNew"
+                  class="input-full"
+                  name="address[city]"
+                  value="{{form.city}}"
+                  autocapitalize="words"
+                  required
+                >
+              </div>
+
+              <div
+                class="grid__item medium-up--one-half js-address-country"
+                data-country-id="AddressCountryNew"
+                data-province-container-id="AddressProvinceContainerNew"
+                data-province-id="AddressProvinceNew"
+              >
+                <label for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
+                <select
+                  id="AddressCountryNew"
+                  class="input-full"
+                  name="address[country]"
+                  data-default="{{form.country}}"
+                  required
+                >
+                  {{ country_option_tags }}
+                </select>
+              </div>
+
+              <div class="grid__item" id="AddressProvinceContainerNew" style="display: none;">
+                <label for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+                <select
+                  id="AddressProvinceNew"
+                  class="input-full"
+                  name="address[province]"
+                  data-default="{{form.province}}"
+                  required
+                ></select>
+              </div>
+
+              <div class="grid__item medium-up--one-half">
+                <label for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressZipNew"
+                  class="input-full"
+                  name="address[zip]"
+                  value="{{form.zip}}"
+                  autocapitalize="characters"
+                  required
+                >
+              </div>
+
+              <div class="grid__item medium-up--one-half">
+                <label for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+                <input
+                  type="tel"
+                  id="AddressPhoneNew"
+                  class="input-full"
+                  name="address[phone]"
+                  value="{{form.phone}}"
+                  maxlength="10"
+                  pattern="\d{10}"
+                  inputmode="numeric"
+                  placeholder="Enter 10-digit phone number"
+                  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                >
+              </div>
+            </div>
+
+            <p>
+              {{ form.set_as_default_checkbox }}
+              <label for="address_default_address_new" class="inline">{{ 'customer.addresses.set_default' | t }}</label>
+            </p>
+            <div class="update-cancel">
+              <button type="submit" id="addresses-add-submit" class="btn">
+                {{ 'customer.addresses.add' | t }}
+              </button>
+
+              <button type="button" id="addresses-cancel-submit" class="text-link address-new-toggle">
+                {{ 'customer.addresses.cancel' | t }}
+              </button>
+            </div>
+          {%- endform -%}
+        </div>
+
+        <div class="address-container">
+          {%- for address in customer.addresses -%}
+            <div class="address {% if address == customer.default_address %} default-address{% endif %}">
+              {%- if address == customer.default_address -%}
+                <!-- <p class="h4">{{ 'customer.addresses.default' | t }}</p> -->
+              {%- endif %}
+
+              {{ address | format_address }}
+
+              <div class="edit-delete-btns">
+                <button type="button" class="btn btn--small address-edit-toggle" data-form-id="{{ address.id }}">
+                  {{ 'customer.addresses.edit' | t }}
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn--secondary btn--small address-delete"
+                  data-form-id="{{ address.id }}"
+                  data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"
+                >
+                  {{ 'customer.addresses.delete' | t }}
+                </button>
+                <div id="showmessage"></div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="edit-address-container">
+          {%- for address in customer.addresses -%}
+            <div id="EditAddress_{{ address.id }}" class="form-vertical js-address-form text-left hide">
+              {%- form 'customer_address', address -%}
+                <!-- <hr class="hr--large"> -->
+                <h2>{{ 'customer.addresses.edit_address' | t }}</h2>
+
+                <div class="grid grid--small">
+                  <div class="grid__item one-half small--one-whole">
+                    <label for="AddressFirstName_{{form.id}}">{{ 'customer.addresses.first_name' | t }}</label>
+                    <input
+                      type="text"
+                      id="AddressFirstName_{{form.id}}"
+                      class="input-full"
+                      name="address[first_name]"
+                      value="{{form.first_name}}"
+                      autocapitalize="words"
+                    >
+                  </div>
+
+                  <div class="grid__item one-half small--one-whole">
+                    <label for="AddressLastName_{{form.id}}">{{ 'customer.addresses.last_name' | t }}</label>
+                    <input
+                      type="text"
+                      id="AddressLastName_{{form.id}}"
+                      class="input-full"
+                      name="address[last_name]"
+                      value="{{form.last_name}}"
+                      autocapitalize="words"
+                      required
+                    >
+                  </div>
+                </div>
+
+                <label for="AddressCompany_{{form.id}}">{{ 'customer.addresses.company' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressCompany_{{form.id}}"
+                  class="input-full"
+                  name="address[company]"
+                  value="{{form.company}}"
+                  autocapitalize="words"
+                >
+
+                <label for="AddressAddress1_{{form.id}}">{{ 'customer.addresses.address1' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressAddress1_{{form.id}}"
+                  class="input-full"
+                  name="address[address1]"
+                  value="{{form.address1}}"
+                  autocapitalize="words"
+                >
+
+                <label for="AddressAddress2_{{form.id}}">{{ 'customer.addresses.address2' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressAddress2_{{form.id}}"
+                  class="input-full"
+                  name="address[address2]"
+                  value="{{form.address2}}"
+                  autocapitalize="words"
+                >
+
+                <label for="AddressCity_{{form.id}}">{{ 'customer.addresses.city' | t }}</label>
+                <input
+                  type="text"
+                  id="AddressCity_{{form.id}}"
+                  class="input-full"
+                  name="address[city]"
+                  value="{{form.city}}"
+                  autocapitalize="words"
+                >
+
+                <div
+                  class="js-address-country"
+                  data-country-id="AddressCountry_{{form.id}}"
+                  data-province-container-id="AddressProvinceContainer_{{form.id}}"
+                  data-province-id="AddressProvince_{{form.id}}"
+                >
+                  <label for="AddressCountry_{{form.id}}">{{ 'customer.addresses.country' | t }}</label>
+                  <select
+                    id="AddressCountry_{{form.id}}"
+                    required
+                    class="input-full"
+                    name="address[country]"
+                    data-default="{{form.country}}"
+                  >
+                    {{ country_option_tags }}
+                  </select>
+                </div>
+
+                <div id="AddressProvinceContainer_{{form.id}}" style="display: none;">
+                  <label for="AddressProvince_{{form.id}}">{{ 'customer.addresses.province' | t }}</label>
+                  <select
+                    id="AddressProvince_{{form.id}}"
+                    class="input-full"
+                    name="address[province]"
+                    data-default="{{form.province}}"
+                  ></select>
+                </div>
+
+                <div class="grid grid--small">
+                  <div class="grid__item one-half small--one-whole">
+                    <label for="AddressZip_{{form.id}}">{{ 'customer.addresses.zip' | t }}</label>
+                    <input
+                      type="text"
+                      id="AddressZip_{{form.id}}"
+                      class="input-full"
+                      name="address[zip]"
+                      value="{{form.zip}}"
+                      autocapitalize="characters"
+                    >
+                  </div>
+
+                  <div class="grid__item one-half small--one-whole">
+                    <label for="AddressPhone_{{form.id}}">{{ 'customer.addresses.phone' | t }}</label>
+                    <!--
+                      <input
+                        type="tel"
+                        id="AddressPhone_{{form.id}}"
+                        class="input-full"
+                        name="address[phone]"
+                        value="{{form.phone}}"
+                        maxlength="10"
+                        pattern="[0-9]{10}"
+                      >
+                    -->
+                    <input
+                      type="text"
+                      id="AddressPhone_{{form.id}}"
+                      class="input-full"
+                      name="address[phone]"
+                      value="{{form.phone}}"
+                      maxlength="10"
+                      pattern="\d{10}"
+                      inputmode="numeric"
+                      placeholder="Enter 10-digit phone number"
+                      oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10)"
+                    >
+                  </div>
+                </div>
+
+                <p>
+                  {{ form.set_as_default_checkbox }}
+                  <label for="address_default_address_{{form.id}}" class="inline">
+                    {{- 'customer.addresses.set_default' | t -}}
+                  </label>
+                </p>
+                <div class="update-cancel">
+                  <button type="submit" id="addresses-update-submit" class="btn">
+                    {{ 'customer.addresses.update' | t }}
+                  </button>
+
+                  <button
+                    type="button"
+                    id="address-edit-toggle"
+                    class="text-link address-edit-toggle"
+                    data-form-id="{{ form.id }}"
+                  >
+                    {{ 'customer.addresses.cancel' | t }}
+                  </button>
+                </div>
+              {%- endform -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endif -%}
+  </div>
+{%- endpaginate -%}
+<script>
+          // Select all elements with the class '.address-edit-toggle' and attach click event listeners
+          // document.querySelectorAll('.address-edit-toggle').forEach(button => {
+          //   button.addEventListener('click', function() {
+          //     // Check if the message is already visible
+          //     var messageElement = this.nextElementSibling;
+          //     if (messageElement && messageElement.classList.contains('edit-message')) {
+          //       // If visible, hide it
+          //       messageElement.style.display = messageElement.style.display === 'none' ? 'block' : 'none';
+          //     } else {
+          //       // If not visible, create and show the message
+          //       messageElement = document.createElement('div');
+          //       messageElement.classList.add('edit-message');
+          //       messageElement.textContent = "Scroll Below to check Edit";
+          //       this.parentNode.insertBefore(messageElement, this.nextSibling);
+          //     }
+          //   });
+          // });
+      // document.querySelectorAll('.address-edit-toggle, #address-edit-toggle').forEach(button => {
+      //   button.addEventListener('click', function () {
+      //     // First, hide all existing messages
+      //     document.querySelectorAll('.edit-message').forEach(msg => {
+      //       msg.style.display = 'none';
+      //     });
+
+      //     // Check if this button already has a visible message next to it
+      //     let messageElement = this.nextElementSibling;
+
+      //     if (messageElement && messageElement.classList.contains('edit-message')) {
+      //       // If the message is hidden, show it again
+      //       if (messageElement.style.display === 'none' || !messageElement.style.display) {
+      //         messageElement.style.display = 'block';
+      //       }
+      //     } else {
+      //       // Create and show new message
+      //       messageElement = document.createElement('div');
+      //       messageElement.classList.add('edit-message');
+      //       messageElement.textContent = "Scroll Below to check Edit";
+      //       this.parentNode.insertBefore(messageElement, this.nextSibling);
+      //     }
+      //   });
+      // });
+      document.querySelectorAll('.address-edit-toggle, #address-edit-toggle').forEach(button => {
+    button.addEventListener('click', function () {
+      const isIDToggle = this.id === 'address-edit-toggle';
+      const messageElement = this.nextElementSibling;
+
+      const allMessages = document.querySelectorAll('.edit-message');
+
+      // If message exists and is next to this button
+      if (messageElement && messageElement.classList.contains('edit-message')) {
+        // Toggle visibility
+        if (messageElement.style.display === 'none' || !messageElement.style.display) {
+          // Hide all other messages
+          allMessages.forEach(msg => {
+            if (msg !== messageElement) msg.style.display = 'none';
+          });
+          messageElement.style.display = 'block';
+        } else {
+          messageElement.style.display = 'none';
+        }
+      } else {
+        // Hide all existing messages
+        allMessages.forEach(msg => msg.style.display = 'none');
+
+        // Create and insert message element
+        const newMessage = document.createElement('div');
+        newMessage.classList.add('edit-message');
+        newMessage.textContent = "Scroll Below to check Edit";
+        newMessage.style.display = 'block';
+        this.parentNode.insertBefore(newMessage, this.nextSibling);
+      }
+    });
+  });
+</script>
+<script>
+  document.getElementById("AddressPhone_{{form.id}}").addEventListener("input", function(e) {
+    this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+  });
+  document.getElementById("AddressPhoneNew").addEventListener("input", function(e) {
+    this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+  });
+</script>
+<style>
+    .edit-message {
+      margin-top: 5px; /* Adjust margin as needed */
+      font-style: italic; /* Example styling */
+      color: #888; /* Example styling */
+          position: absolute;
+
+    }
+  .edit-delete-btns {
+      margin-bottom: 15px;
+  }
+</style>

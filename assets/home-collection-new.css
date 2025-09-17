@@ -1,0 +1,214 @@
+.main-carousel .slick-track {
+  display: flex;
+
+}
+.main-carousel {
+  margin-bottom: 20px;
+}
+.main-carousel .slick-track .slick-slide {
+    margin: 0 10px;
+    position: relative;
+  overflow: hidden;
+}
+.section-shop-by .section-header {
+  display: block;
+  margin-bottom: 30px;
+}
+.section-shop-by .section-header .section-header__title{
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.main-carousel .slick-track .slick-slide:nth-child(1) {
+    margin-left: 0;
+}
+.main-carousel .slick-track .slick-slide:nth-child(n + 4) {
+    margin-right: 0;
+}
+.section-shop-by .section-header .section-header__title a.view-all-btn {
+    display: inline-block;
+    font-size: 12px;
+    border: 1px solid #000;
+    padding: 10px 20px;
+    font-weight: 700;
+}
+.section-shop-by .section-header .section-header__title a.view-all-btn:hover {
+    background: #FFBA00;
+    border: 1px solid #FFBA00;
+}
+.main-carousel .slick-track .slick-slide h3 span.arrow-icon {
+  background: url(plain-right.png) no-repeat center center;
+    width: 30px;
+    height: 30px;
+    background-size: 100%;
+}
+.main-carousel .slick-track .slick-slide h3:hover span.arrow-icon {
+  background: url(colored-right.png) no-repeat center center;
+}
+.main-carousel .slick-track .slick-slide .c-name {
+    position: absolute;
+    width: 100%;
+    bottom: 15px;
+    color: #fff;
+}
+.main-carousel .slick-track .slick-slide .c-name h3 a{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    text-transform: capitalize;
+    align-items: center;
+    color: inherit;
+}
+.section-shop-by .section-header .section-header__title span.seprator {
+    border: 1px solid #000;
+    flex: 2;
+}
+.full-width-category {
+  margin-bottom: 20px;
+}
+.full-width-category .cta-box {
+  position: relative;
+}
+.full-width-category .cta-box .cta-title {
+    position: absolute;
+    top: 35%;
+    left: 10%;
+    color: #fff;
+      text-align: center;
+    max-width: 50%;
+}
+.full-width-category .cta-box .cta-title a.btn-action {
+    display: inline-block;
+    border: 1px solid #FFBA00;
+    background: #FFBA00;
+    padding: 7px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+button.slick-next.slick-arrow {
+  background: url(right-scroll.png) no-repeat center center;
+  right: -15px;
+}
+button.slick-prev.slick-arrow {
+  background: url(left-scroll.png) no-repeat center center;
+  left: -15px;
+}
+.section-shop-by button.slick-arrow, .slick-slider button.slick-arrow {
+    width: 46px;
+    height: 46px;
+    font-size: 0;
+    z-index: 1;
+}
+.section-shop-by button.slick-arrow:before, .slick-slider button.slick-arrow::before {
+    display: none;
+}
+.category-list .home-category {
+    display: flex;
+    gap: 15px;
+}
+.category-list .home-category .category-block {
+  position: relative;
+  overflow: hidden;
+}
+.category-list .home-category .category-block img {
+  transition: all .8s ease;
+}
+.category-list .home-category .category-block:hover img {
+    transform: scale(1.09);
+    transition: all .8s ease;
+}
+.category-list .home-category .category-block .c-name {
+  position: absolute;
+  left: 10%;
+  bottom:30px;
+      color: #fff;
+}
+.category-list .home-category .category-block .c-name .view-more {
+  display: inline-block;
+  background: #FFBA00;
+  padding: 10px 15px;
+}
+.category-list .home-category .category-block .c-name .view-more:after {
+  content: "";
+  background: url(Group8.png) right center no-repeat;
+    background-size: auto;
+  width: 13px;
+  height: 11px;
+  display: inline-block;
+  background-size: 12px;
+  margin-left: 5px;
+}
+.full-width-category .cta-box {
+  overflow: hidden;
+}
+.category-list .home-category .category-block .c-name:hover .view-more:after {
+  transform: rotate(25deg);
+}
+.full-width-category .cta-box image-element.aos-init.aos-animate img {
+    width: 100%;
+    transition: all .8s ease;
+}
+.full-width-category .cta-box:hover image-element.aos-init.aos-animate img {
+  transform: scale(1.09);
+}
+.main-carousel .slick-track .slick-slide img{
+      transition: all .8s ease;
+}
+.main-carousel .slick-track .slick-slide:hover img {
+    transform: scale(1.09);
+    transition: all .8s ease;
+}
+@media only screen and (max-width: 767px) {
+
+.full-width-category .cta-box {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.full-width-category .cta-box .cta-title {
+  position: absolute;
+  top: 12px;
+  left: unset;
+  color: #fff;
+  text-align: center;
+  max-width: 100%;
+}
+.full-width-category .cta-box .cta-title h2 {
+  font-size: 18px;
+}
+.main-carousel .slick-track {
+  gap: 0px;
+}
+.main-carousel {
+  margin-bottom: 10px;
+}
+.main-carousel .slick-track .slick-slide {
+  margin: 0 5px;
+}
+.main-carousel.slick-initialized.slick-slider {
+  margin: 0 -5px;
+  margin-bottom: 10px;
+}
+.main-carousel .slick-track .slick-slide:nth-child(1) {
+  margin-left: 5px;
+}
+.main-carousel .slick-track .slick-slide .c-name h3 {
+  font-size: 16px;
+} 
+.main-carousel .slick-track .slick-slide h3 span.arrow-icon {
+  width: 20px;
+  height: 20px;
+}
+.main-carousel .slick-track .slick-slide h3:hover span.arrow-icon {
+  width: 20px;
+  height: 20px;
+  background-size: 100%;
+}
+  button.slick-next.slick-arrow {
+  right: 5px;
+}
+}

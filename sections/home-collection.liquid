@@ -1,0 +1,129 @@
+{{ 'home-collection-new.css' | asset_url | stylesheet_tag: preload: true }}
+<div class="page-width">
+  <div class="collection-list section-shop-by">
+    <div class="section-header">
+      <h2 class="section-header__title">
+        {{ section.settings.title1 }}
+        <span class="seprator"></span>
+        <a class="view-all-btn" href="/collections">View All</a>
+      </h2>
+    </div>
+    <div class="main-carousel">
+      {% for block in section.blocks %}
+        <div class="carousel-slide">
+          {% assign collectionImage = block.settings.collection_image %}
+          <a href="collections/{{ block.settings.collection_id_new }}">
+            {%- render 'image-element',
+              img: collectionImage,
+              widths: '360, 540, 720, 900, 1080',
+              classes: classes,
+              sizes: sizes,
+              sizeVariable: sizeVariable,
+              fallback: fallback
+            -%}
+          </a>
+          <div class="c-name">
+            <h3>
+              <a href="collections/{{ block.settings.collection_id_new }}">
+                {{ block.settings.collection_name -}}
+                <span class="arrow-icon"></span
+              ></a>
+            </h3>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="full-width-category">
+      <div class="cta-box">
+        {% assign bigBanner1 = section.settings.collection_image_big %}
+        {%- render 'image-element',
+          img: bigBanner1,
+          widths: '360, 540, 720, 900, 1080',
+          classes: classes,
+          sizes: sizes,
+          sizeVariable: sizeVariable,
+          fallback: fallback
+        -%}
+        <div class="cta-title">
+          <div class="sub-title">
+            <h4>{{ section.settings.collection_name_subtitle }}</h4>
+            <h2>{{ section.settings.collection_name_big_title }}</h2>
+            <a class="btn-action" href="{{ section.settings.collection_link_cta }}">Shop Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+    "name": "Home Collection",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title1",
+            "label": "Title",
+            "default": "Shop by Category"
+        },
+        {
+            "type": "range",
+            "id": "num_collections",
+            "label": "Number of Collections to Display",
+            "min": 1,
+            "max": 8,
+            "default": 4
+        },
+        {
+            "type": "image_picker",
+            "id": "collection_image_big",
+            "label": "Select Image"
+        },
+        {
+            "type": "text",
+            "id": "collection_name_big_title",
+            "label": "Enter Title"
+        },
+        {
+            "type": "text",
+            "id": "collection_name_subtitle",
+            "label": "Subtitle"
+        },
+        {
+            "type": "url",
+            "id": "collection_link_cta",
+            "label": "Add CTA"
+        }
+    ],
+    "class": "shop-by-category",
+    "blocks": [
+        {
+            "type": "collection-list",
+            "name": "Collection List",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "collection_image",
+                    "label": "Collection Image"
+                },
+                {
+                    "type": "text",
+                    "id": "collection_name",
+                    "label": "Collection Name"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection_id_new",
+                    "label": "Select Collection"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Home Collection",
+            "blocks": []
+        }
+    ]
+}
+{% endschema %}

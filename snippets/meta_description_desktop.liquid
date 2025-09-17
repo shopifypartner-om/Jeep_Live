@@ -1,0 +1,158 @@
+{% capture description %}
+{{ product.description }}
+    {% endcapture %}
+<div class="meta_description">
+  {% assign tabmeta = '' %}
+  <ul class="meta_description_tab">
+   
+    {% for block in section.blocks %}
+      {% if block.settings.description != blank %}
+      <li class="tab-collection-name {% if forloop.first %}active{% endif %}">
+        <a href="#meta_description-{{ block.id }}">
+          {%- if block.settings.titlename != blank -%}
+            {{- block.settings.titlename -}}
+          {% endif %}
+        </a>
+      </li>
+      {% capture content %}
+            <div id="meta_description-{{ block.id }}" class="meta-tab-description {% if forloop.first %}active{% endif %}" >           
+             <div class="tab-meta_description_block">
+              
+                {% if forloop.index == 1 %}
+                {{ description }}
+                   {% elsif forloop.index == 2 %}
+                  {% assign metafield_dataq = product.metafields.custom.feature.value %}
+               <div class="">
+                
+                {% for paragraph in metafield_dataq %}
+                {% if paragraph != blank %}
+                <p class=""> {{ paragraph }}</p>
+                {% endif %}
+                {% endfor %}
+                
+               </div>
+                  {% elsif forloop.index == 3 %}
+                   {{ block.settings.description }}
+              {%- endif -%}
+             </div>
+            </div>
+         {% endcapture %}
+      {% assign tabmeta = tabmeta | append: content %}
+      {% else %}
+    {% endif %}
+    {% endfor %}
+    
+  </ul>
+
+  {{ tabmeta }}
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('.meta_description_tab a').click(function (e) {
+      e.preventDefault();
+
+      // Remove 'active' class from all meta_description and tab contents
+
+      $('.meta_description_tab li').removeClass('active');
+
+      $('.meta-tab-description').removeClass('active');
+
+      $(this).parent().addClass('active');
+
+      $($(this).attr('href')).addClass('active');
+    });
+  });
+
+  function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+</script>
+
+<style>
+  .meta_description .meta-tab-description {
+    display: none;
+  }
+  .meta_description .meta-tab-description.active {
+    display: block;
+  }
+  .meta_description ul.meta_description_tab {
+    display: inline-flex;
+    justify-content: center;
+    gap: 40px;
+    list-style: none;
+    text-decoration: none;
+    border-bottom: none;
+    position: relative;
+    width: 100%;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 0;
+    text-transform: uppercase;
+  }
+  .meta_description li.tab-collection-name a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333333b3;
+  }
+  .meta_description li.tab-collection-name {
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid #fff;
+  }
+  .meta_description li.tab-collection-name.active {
+    border-bottom: 2px solid rgb(242, 122, 71);
+    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15);
+  }
+  .meta_description li.tab-collection-name.active a {
+    color: var(--text);
+  }
+  .liner-continerright1 {
+    line-height: normal;
+    margin-bottom: 0;
+  }
+  .liner-continerright1 span {
+    padding-bottom: 15px;
+    display: inline-block;
+    position: relative;
+  }
+  @media (max-width: 768px) {
+    .meta_description ul.meta_description_tab {
+      justify-content: left;
+    }
+
+    .meta_description li.tab-collection-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #000;
+      border-bottom: 2px solid #fff;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .meta_description li.tab-collection-name a {
+      text-decoration: none;
+      font-size: 15px;
+      color: #333333b3;
+    }
+
+    .tab-meta_description_block {
+      margin-top: 10px;
+
+      font-size: 13px;
+    }
+  }
+</style>

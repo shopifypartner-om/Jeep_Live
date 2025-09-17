@@ -1,0 +1,28 @@
+<div class="fixed-footer">
+  <div class="icons home {% if request.path == '/' %}active{% endif %}">
+    <a href="{{ '/' | within: 'link' }}">
+      <img width="" height="" src="{{ 'home.png' | asset_url }}" alt="Home">
+    </a>
+  </div>
+  <div class="icons category {% if request.path contains '/collections' %}active{% endif %}">
+    <a href="{{ '/collections' | within: 'link' }}">
+      <img width="" height="" src="{{ 'category.png' | asset_url }}" alt="Category">
+    </a>
+  </div>
+  <div class="icons wishlist {% if request.path == '/a/wishlist' %}active{% endif %}">
+    <a href="{{ '/a/wishlist' | within: 'link' }}">
+      <img width="" height="" src="{{ 'wishlist.png' | asset_url }}" alt="Wishlist">
+    </a>
+  </div>
+  <div class="icons cart {% if request.path == '/cart' %}active{% endif %}">
+    <a href="{{ '/cart' | within: 'link' }}">
+      <img width="" height="" src="{{ 'cart.png' | asset_url }}" alt="Cart">
+      <span class="cart-count">{{ cart.item_count }}</span>
+    </a>
+  </div>
+  <div class="icons account {% if request.path == '/account' %}active{% endif %}">
+    <a href="{{ '/account' | within: 'link' }}">
+      <img width="" height="" src="{{ 'account.png' | asset_url }}" alt="Account">
+    </a>
+  </div>
+</div>
