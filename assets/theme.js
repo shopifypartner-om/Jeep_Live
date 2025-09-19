@@ -4376,14 +4376,29 @@ theme.recentlyViewed = {
           newAddressForm.classList.toggle('hide');
         });
       });
-  
+  /*
       document.querySelectorAll('.address-edit-toggle').forEach(el => {
         el.addEventListener('click', function(evt) {
           var formId = evt.currentTarget.dataset.formId;
           document.getElementById('EditAddress_' + formId).classList.toggle('hide');
         });
-      });
+      }); */
   
+
+      document.querySelectorAll('.address-edit-toggle').forEach(el => {
+  el.addEventListener('click', function(evt) {
+    var formId = evt.currentTarget.dataset.formId;
+    var currentForm = document.getElementById('EditAddress_' + formId);
+
+    document.querySelectorAll('.address-edit-form').forEach(form => {
+      if (form !== currentForm) form.classList.add('hide');
+    });
+
+    currentForm.classList.toggle('hide');
+  });
+});
+
+
       document.querySelectorAll('.address-delete').forEach(el => {
         el.addEventListener('click', function(evt) {
           var formId = evt.currentTarget.dataset.formId;

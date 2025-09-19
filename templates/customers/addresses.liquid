@@ -216,7 +216,7 @@
 
         <div class="edit-address-container">
           {%- for address in customer.addresses -%}
-            <div id="EditAddress_{{ address.id }}" class="form-vertical js-address-form text-left hide">
+            <div id="EditAddress_{{ address.id }}" class="form-vertical js-address-form text-left address-edit-form hide">
               {%- form 'customer_address', address -%}
                 <!-- <hr class="hr--large"> -->
                 <h2>{{ 'customer.addresses.edit_address' | t }}</h2>
@@ -472,15 +472,3 @@
     this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
   });
 </script>
-<style>
-    .edit-message {
-      margin-top: 5px; /* Adjust margin as needed */
-      font-style: italic; /* Example styling */
-      color: #888; /* Example styling */
-          position: absolute;
-
-    }
-  .edit-delete-btns {
-      margin-bottom: 15px;
-  }
-</style>

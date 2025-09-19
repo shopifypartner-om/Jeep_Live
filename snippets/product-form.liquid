@@ -53,7 +53,12 @@
       </span>
     </button>
 
-    <div class="smartwishlist quickview" data-product="{{ product.id }}" data-variant="{{ product.variants.first.id }}"></div>
+   <div class="smartwishlist quickview" 
+     id="smartwishlist-{{ product.id }}"
+     data-product="{{ product.id }}" 
+     data-variant="{{ product.selected_or_first_available_variant.id }}">
+</div>
+
   </div>
   <div class="sp-compare-custom-product"></div>
   {%- if enable_dynamic_buttons -%}
@@ -80,15 +85,19 @@
   </select>
 {%- endform -%}
 <script>
-  $(document).ready(function(){
-    $(".jdgm-prev-badge__text").on('click', function(event) {
-        event.preventDefault();
+document.addEventListener('DOMContentLoaded', function() {
+  // Select the wishlist div for this product dynamically
+  const wishlistDiv = document.querySelector('.smartwishlist.quickview[data-product="{{ product.id }}"]');
+  const variantSelect = document.querySelector('select[name="id"][data-product-select]');
 
-        var target = $('#judgeme_product_reviews');
+  if (wishlistDiv && variantSelect) {
+    // page load pe correct variant set kar do
+    wishlistDiv.dataset.variant = variantSelect.value;
 
-        // Using jQuery's animate() method to add smooth page scroll
-        $('html, body').animate({
-            scrollTop: target.offset().top - 130
-        }, 800);
+    // variant change hone par update kar do
+    variantSelect.addEventListener('change', function(e){
+      wishlistDiv.dataset.variant = e.target.value;
     });
-});</script>
+  }
+});
+</script>
