@@ -1360,12 +1360,12 @@ body.template-collection h1.section-header__title {
   content: "\2713";
   position: absolute;
   right: 0px;
-  top: 4px;
+  top: 2px;
   background: #ffba00;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   text-align: center;
-  line-height: 25px;
+  line-height: 18px;
 }
 .grid__item--sidebar {
   max-height: 100%;
@@ -2193,7 +2193,7 @@ body.template-cart
     bottom: 60px;
     left: 0;
     width: 100%;
-    z-index: 99999;
+    z-index: 90;
   }
   .payment-buttons .sp-compare-custom-product {
     width: 100%;
@@ -2280,6 +2280,7 @@ margin-bottom: 5px;
     padding: 0.7px !important;
     top: 1.7px;
     right: 4.5px;
+    line-height: 12px;
 } 
 
 @media (max-width: 450px) {
@@ -2294,6 +2295,7 @@ margin-bottom: 5px;
     font-size: 0.56rem;
     top: 0.5rem;
     left : 1.1rem;
+    line-height: 11px;
   } 
 
   .cae-button-row  .button.button.btn.btn--primary.btn--large.Form__Submit.Button.Button--primary.Button--full.cae-button{
@@ -2303,6 +2305,7 @@ margin-bottom: 5px;
     justify-content: center;
     display: flex;
     font-size: 0.8rem;
+    padding: 5px;
 }
 }
 @media (min-width: 451px) and (max-width: 800px) {
@@ -2395,4 +2398,35 @@ margin-bottom: 5px;
 .collection-sidebar {
     margin-bottom: 20px;
     padding-right: 0px !important;
+}
+/* ssss new*/
+.tag--active>a, .tag--active>label {
+font-size: 12px;
+}
+
+
+span.cart-link__bubble.cart-link__bubble--visible {
+    height: 17px;
+    width: 17px;
+    font-size: 0.61rem;
+    font-weight: 600;
+    position: absolute;
+    padding: 0.7px !important;
+    top: -2.3px;
+    right: -7.5px;
+    line-height: 11px !important;
+}
+span.cart-link__bubble.cart-link__bubble--visible span.cart-count{
+  font-size: 9px;
+  font-weight: 600;
+}
+
+@media (max-width: 450px) {
+  span.cart-link__bubble.cart-link__bubble--visible {
+    line-height: 15px !important;
+  }
+}
+
+select.jdgm-sort-dropdown {
+  padding-left: 4px;
 }
