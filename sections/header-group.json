@@ -17,8 +17,8 @@
         "announcement-0": {
           "type": "announcement",
           "settings": {
-            "text": "Dispatches paused from March 31st – April 15th",
-            "link_text": "due to operational maintenance; orders will ship after April 15th",
+            "text": "Gear Up with Jeep! Save 5%–20% Instantly at Checkout",
+            "link_text": "",
             "link": ""
           }
         },
@@ -36,7 +36,6 @@
         "announcement-0",
         "announcement-1"
       ],
-      "disabled": true,
       "settings": {
         "announcement_compact": true,
         "announcement_enable": true
