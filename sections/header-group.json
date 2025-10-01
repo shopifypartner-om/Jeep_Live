@@ -16,7 +16,6 @@
       "blocks": {
         "announcement-0": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "text": "Dispatches paused from March 31st – April 15th",
             "link_text": "due to operational maintenance; orders will ship after April 15th",
@@ -37,6 +36,7 @@
         "announcement-0",
         "announcement-1"
       ],
+      "disabled": true,
       "settings": {
         "announcement_compact": true,
         "announcement_enable": true
