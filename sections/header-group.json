@@ -23,15 +23,6 @@
             "link": ""
           }
         },
-        "announcement_Xnfeka": {
-          "type": "announcement",
-          "disabled": true,
-          "settings": {
-            "text": "Gear Up with Jeep! Save 5%–20% Instantly at Checkout",
-            "link_text": "Save 5%-20%",
-            "link": ""
-          }
-        },
         "announcement-1": {
           "type": "announcement",
           "disabled": true,
@@ -44,7 +35,6 @@
       },
       "block_order": [
         "announcement-0",
-        "announcement_Xnfeka",
         "announcement-1"
       ],
       "settings": {
