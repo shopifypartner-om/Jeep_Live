@@ -2452,7 +2452,7 @@ button.discount_coupen_accordian_header {
   justify-content: space-between;
   align-items: center;
   padding: 10px 14px;
-  background: #c8c1c1;
+  background: #d8d3d3;
   border: none;
   cursor: pointer;
   font-weight: bold;
@@ -2491,4 +2491,13 @@ span.accordin_Text {
 .accordion-content ul {
     margin: 0 0 15px 6px;
     list-style: none;
+}
+
+.modal__centered-content .discount_coupen_accordian.active {
+    width: 85%;
+}
+
+.header-wrapper .site-header{
+  /* top: 0 !important; */
+  top: 0;
 }

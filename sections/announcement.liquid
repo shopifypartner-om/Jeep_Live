@@ -21,14 +21,14 @@
     color: {{ settings.color_announcement_text | default: '#000000' }};
   }
 
-  .site-header--opening {
+  {% comment %} .site-header--opening {
     top: 50px !important;
     position: fixed;
   }
 
   .site-header {
     top: 15px;
-  }
+  } {% endcomment %}
 
   @media (max-width: 768px) {
     body {
@@ -58,7 +58,7 @@
     }
 
     .site-header--opening {
-      top: 50px !important;
+      top: 0px !important;
       position: fixed;
     }
 
