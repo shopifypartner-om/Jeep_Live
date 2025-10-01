@@ -2430,3 +2430,65 @@ span.cart-link__bubble.cart-link__bubble--visible span.cart-count{
 select.jdgm-sort-dropdown {
   padding-left: 4px;
 }
+
+
+.discount_coupen_accordian {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px 0;
+  overflow: hidden;
+  width: 60%;
+}
+@media (max-width: 462px) {
+  .discount_coupen_accordian {
+    width: 100%; 
+  }
+}
+
+button.discount_coupen_accordian_header {
+  font-size: small;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: #c8c1c1;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.accordion-icon {
+  transition: transform 0.3s ease;
+}
+
+.accordion-content {
+  font-size: 13px;
+  padding: 10px 14px;
+  display: none;
+  border-top: 1px solid #ddd;
+  background: #fff;
+}
+
+.discount_coupen_accordian.active .accordion-content {
+  display: block;
+}
+
+.discount_coupen_accordian.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+span.accordin_Text {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #666;
+  position: relative;
+  left: 6px;
+}
+
+
+.accordion-content ul {
+    margin: 0 0 15px 6px;
+    list-style: none;
+}

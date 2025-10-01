@@ -264,6 +264,24 @@
                           {%- endif -%}
                         </div>
                       {%- endif -%}
+                         <div class="discount_coupen_accordian active">
+                             <button class="discount_coupen_accordian_header">
+   <span>Enjoy Discounts on Your Purchase! 🎉</span>
+    <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24">
+      <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" />
+    </svg>
+  </button>
+  <div class="accordion-content">
+    <ul>
+      <li>₹500–₹1000 → 5% Off</li>
+      <li>₹1000–₹2000 → 10% Off</li>
+      <li>₹2000–₹3000 → 15% Off</li>
+       <li>₹3000 and above → 20% Off</li>
+    </ul>
+    <span class="accordin_Text">Discount auto-applies at checkout. T&C apply.</span>
+  </div>
+</div>
+
                     </div>
                   {%- when 'quantity_selector' -%}
                     <div class="product-block" {{ block.shopify_attributes }}>

@@ -8462,3 +8462,14 @@ document.addEventListener("click", async function (event) {
     itemElement?.classList.remove("is-updating");
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const accordions = document.querySelectorAll(".discount_coupen_accordian");
+
+  accordions.forEach((accordion) => {
+    const header = accordion.querySelector(".discount_coupen_accordian_header");
+    header.addEventListener("click", function () {
+      accordion.classList.toggle("active");
+    });
+  });
+});
