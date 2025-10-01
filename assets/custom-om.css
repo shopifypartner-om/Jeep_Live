@@ -1477,6 +1477,9 @@ body.template-collection h1.section-header__title {
 #CartDrawer .drawer__footer input:focus {
   border: 1px solid #eeeeee8a;
 }
+#CartDrawer.drawer--right.drawer--is-open {
+    z-index: 9999;
+}
 .product-block .variant-input-wrap .color-swatch {
   height: 25px;
   width: 25px;
@@ -2437,7 +2440,7 @@ select.jdgm-sort-dropdown {
   border-radius: 8px;
   margin: 10px 0;
   overflow: hidden;
-  width: 60%;
+  width: 70%;
 }
 @media (max-width: 462px) {
   .discount_coupen_accordian {

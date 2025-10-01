@@ -14,7 +14,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 9999;
+    z-index: 999;
 
     /* Shopify settings colors */
     background-color: {{ settings.color_announcement | default: '#f4f4f4' }};
@@ -37,7 +37,8 @@
 
     .header-layout--center {
     align-items: center;
-    padding: 42px 0 0 1px;
+     {% comment %} padding: 42px 0 0 1px; {% endcomment %}
+    padding: 12px 0 0 1px;
 }
         
 }
@@ -50,7 +51,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 9999;
+      z-index: 999;
 
       /* Shopify settings colors with fallback */
       background-color: {{ settings.color_announcement | default: '#f4f4f4' }};
@@ -58,7 +59,7 @@
     }
 
     .site-header--opening {
-      top: 0px !important;
+      top: 41px !important;
       position: fixed;
     }
 

@@ -8464,12 +8464,12 @@ document.addEventListener("click", async function (event) {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const accordions = document.querySelectorAll(".discount_coupen_accordian");
+  document.addEventListener("click", function (e) {
+  const header = e.target.closest(".discount_coupen_accordian_header");
+  if (header) {
+    const accordion = header.closest(".discount_coupen_accordian");
+    accordion.classList.toggle("active");
+  }
+});
 
-  accordions.forEach((accordion) => {
-    const header = accordion.querySelector(".discount_coupen_accordian_header");
-    header.addEventListener("click", function () {
-      accordion.classList.toggle("active");
-    });
-  });
 });
