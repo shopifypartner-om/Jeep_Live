@@ -2504,3 +2504,7 @@ span.accordin_Text {
   /* top: 0 !important; */
   top: 0;
 }
+
+.custom-nav .page-width {
+    padding: 0px;
+}
