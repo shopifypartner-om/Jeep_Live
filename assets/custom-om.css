@@ -2508,3 +2508,7 @@ span.accordin_Text {
 .custom-nav .page-width {
     padding: 0px;
 }
+.flickity-page-dots .dot.is-selected {
+    background-color: #ffba00;
+  
+}
