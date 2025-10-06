@@ -2512,3 +2512,10 @@ span.accordin_Text {
     background-color: #ffba00;
   
 }
+
+@media only screen and (min-width: 1024px) {
+
+.site-nav__link {
+    padding:7.5px 9px;
+}
+}
