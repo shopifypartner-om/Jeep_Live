@@ -139,7 +139,7 @@
         "section_height": "natural",
         "mobile_height": "auto",
         "parallax": false,
-        "style": "arrows",
+        "style": "dots",
         "autoplay": true,
         "autoplay_speed": 7,
         "lazyload_images": true
