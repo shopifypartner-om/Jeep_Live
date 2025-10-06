@@ -2519,3 +2519,7 @@ span.accordin_Text {
     padding:7.5px 9px;
 }
 }
+
+li.site-nav__item.site-nav__expanded-item.site-nav--has-dropdown .site-nav__link{
+  font-size: 13.52px;
+}
