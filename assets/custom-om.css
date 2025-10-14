@@ -2528,9 +2528,6 @@ li.site-nav__item.site-nav__expanded-item.site-nav--has-dropdown .site-nav__link
     body {
         padding-top: 34px !important;
     }
-    .site-header--opening {
-    top: 34px !important;
-    position: fixed;
-}
+   
   
 }
