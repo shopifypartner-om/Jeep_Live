@@ -2528,9 +2528,9 @@ li.site-nav__item.site-nav__expanded-item.site-nav--has-dropdown .site-nav__link
     body {
         padding-top: 34px !important;
     }
-    .custom-header {
+    /* .custom-header {
   
     position: relative;
     top: -7px;
-}
+} */
 }
