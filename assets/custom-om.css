@@ -2523,3 +2523,9 @@ span.accordin_Text {
 li.site-nav__item.site-nav__expanded-item.site-nav--has-dropdown .site-nav__link{
   font-size: 13.52px;
 }
+
+@media (max-width: 768px) {
+    body {
+        padding-top: 34px !important;
+    }
+}
