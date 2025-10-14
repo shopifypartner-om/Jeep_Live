@@ -264,7 +264,7 @@
                           {%- endif -%}
                         </div>
                       {%- endif -%}
-                         <div class="discount_coupen_accordian active">
+                         {% comment %} <div class="discount_coupen_accordian active">
                              <button class="discount_coupen_accordian_header">
    <span>Enjoy Discounts on Your Purchase! 🎉</span>
     <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24">
@@ -280,7 +280,7 @@
     </ul>
     <span class="accordin_Text">Discount auto-applies at checkout. T&C apply.</span>
   </div>
-</div>
+</div> {% endcomment %}
 
                     </div>
                   {%- when 'quantity_selector' -%}
