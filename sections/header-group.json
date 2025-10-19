@@ -40,7 +40,7 @@
       "disabled": true,
       "settings": {
         "announcement_compact": true,
-        "announcement_enable": true
+        "announcement_enable": false
       }
     },
     "header": {
