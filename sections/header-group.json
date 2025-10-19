@@ -16,6 +16,7 @@
       "blocks": {
         "announcement-0": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "🎉 Diwali Dhamaka Offer! Get 30% OFF on all clothing products above ₹500! ✨",
             "link_text": "",
