@@ -33,7 +33,6 @@
         },
         "image_x483UG": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "top_subheading": "",
             "title": "",
@@ -45,15 +44,14 @@
             "link_text_2": "",
             "color_accent": "rgba(0,0,0,0)",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/image_1.jpg",
-            "image_mobile": "shopify://shop_images/image_2a5b2c53-adb4-48fa-9eb0-a33521d98e4d.jpg",
+            "image": "shopify://shop_images/WhatsApp_Image_2025-..._imresizer_3.jpg",
+            "image_mobile": "shopify://shop_images/WhatsApp_Image_2025-..._imresizer_4.jpg",
             "parallax_direction": "top",
             "overlay_opacity": 0
           }
         },
         "image_rPzYdy": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "top_subheading": "",
             "title": "",
@@ -65,8 +63,8 @@
             "link_text_2": "",
             "color_accent": "rgba(0,0,0,0)",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/WhatsApp_Image_2025-10-03_at_08.44.17_c300c708.jpg",
-            "image_mobile": "shopify://shop_images/WhatsApp_Image_2025-10-03_at_08.44.17_199b4f61.jpg",
+            "image": "shopify://shop_images/WhatsApp_Image_2025-..._imresizer_5.jpg",
+            "image_mobile": "shopify://shop_images/WhatsApp_Image_2025-..._imresizer_6.jpg",
             "parallax_direction": "top",
             "overlay_opacity": 0
           }
