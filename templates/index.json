@@ -25,8 +25,8 @@
             "link_text_2": "",
             "color_accent": "rgba(0,0,0,0)",
             "text_align": "vertical-center horizontal-center",
-            "image": "shopify://shop_images/Artboard_2.jpg",
-            "image_mobile": "shopify://shop_images/Artboard_4_1.jpg",
+            "image": "shopify://shop_images/WhatsApp_Image_2025-12-11_at_10.00.36_PM.jpg",
+            "image_mobile": "shopify://shop_images/WhatsApp_Image_2025-12-11_at_10.00.36_PM_1.jpg",
             "parallax_direction": "top",
             "overlay_opacity": 0
           }
@@ -112,7 +112,6 @@
         },
         "image_VYtCQc": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "top_subheading": "Apparel that embodies your spirit of Adventure and freedom",
             "title": "",
@@ -152,6 +151,7 @@
         },
         "image_CrNjGp": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "top_subheading": "CAR ACCESSORIES FOR YOUR NEXT ADVENTURE EXPERIENCE",
             "title": "",
