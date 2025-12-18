@@ -2536,7 +2536,7 @@ li.site-nav__item.site-nav__expanded-item.site-nav--has-dropdown .site-nav__link
 .site-footer .page-width .custom-footer {
     /* display: flex; */
     justify-content: space-between;
-    /* margin-top: 25px; */
+    margin-top: 5px;
     align-items: flex-end;
     display: flex;
     flex-direction: column;
